@@ -4,7 +4,7 @@ function quickCalculate(form){
     return (grade/max) * 100;
 }
 
-function  
+
 
 function setState(grade){
     if(grade<0)

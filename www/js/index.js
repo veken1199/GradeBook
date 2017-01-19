@@ -102,9 +102,25 @@ function openClass(className) {
 }
 
 function addGrade(cssSelector){
+
+    var inserted_grade;
+    var actual_grade;
+    var contribution;
+    var weight;
+    var max_grade;
+    var item_name;
+
     var inputMapVar = $$('input[name*="' + cssSelector + '"]');
+
     if (formValidor(inputMapVar)) {
-        //isValidGrade(inputMapVar);
+        
+        actual_grade = quickCalculate(inputMapVar);
+        
+        inserted_grade = inputMapVar[0].value;
+        max_grade = inputMapVar[1].value;
+        weight = inputMapVar[2].value;
+        contribution = actual_grade * weight;
+        alert(contribution);
     }
 }
 
