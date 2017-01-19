@@ -1,9 +1,10 @@
 function quickCalculate(form){
     var grade = form[0].value;
     var max = form[1].value;
-
     return (grade/max) * 100;
 }
+
+function  
 
 function setState(grade){
     if(grade<0)
@@ -49,8 +50,5 @@ function setState(grade){
      if(grade>=120)
      {
         return "What did you do to the prof!";
-     }
-
-    
-        
+     }    
 }
