@@ -107,7 +107,9 @@ function deleteCLassModel(className){
                 removeFromList(className);
             });
 
-});
+    });
 }
+
+
 
 
