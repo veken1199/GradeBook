@@ -98,6 +98,7 @@ function deleteClass(className) {
 
 function openClass(className) {
     mainView.router.load({ url: "Class.html" });
+    loadGradeBookTable(className);
     $$('#class-title').text(className);  
 }
 
