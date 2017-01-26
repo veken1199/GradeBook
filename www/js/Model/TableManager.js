@@ -18,7 +18,7 @@ function populateDB(tx) {
             tx.executeSql(sql);
             break;
 
-        case "gradebook":
+        default:
             sql = "CREATE TABLE IF NOT EXISTS " + name + "(" +
                 "grade VARCHAR," +
                 "percentage VARCHAR," +
@@ -117,6 +117,17 @@ function deleteCLassModel(className) {
         });
 
     });
+}
+
+function loadGradeBookTable(gradebook) {
+    loadDB(gradebook);
+    db.transaction(function(tx){
+        sql = "SELECT * FROM " + gradebook + " ";
+        tx.executeSql(sql,[],function (tx,results){
+            console.log(results);
+        });
+    });
+
 }
 
 
