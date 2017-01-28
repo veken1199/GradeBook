@@ -122,12 +122,36 @@ function deleteCLassModel(className) {
 function loadGradeBookTable(gradebook) {
     loadDB(gradebook);
     db.transaction(function(tx){
-        sql = "SELECT * FROM " + gradebook + " ";
+        sql = "SELECT * FROM " + gradebook;
         tx.executeSql(sql,[],function (tx,results){
             console.log(results);
         });
     });
 
+}
+
+function insertGrade(item,gradebook) {
+    loadDB(gradebook);
+    db.transaction(function(tx) {
+       sql = "INSERT INTO " + gradebook + " (grade,percentage,maxgrade,item)  VALUES (?,?,?,?)" ;
+       tx.executeSql(sql,[
+                            item['grade'],
+                            item['percentage'],
+                            item['maxgrade'],
+                            item['item']
+       ], function (tx,results){
+           var data = {
+               "grade"       :   item['grade'],
+               "percentage"  :   item['percentage'],
+               "recieved"    :   item["grade"]/item['maxgrade'],
+               "item"        :   item['item'],
+               "contribution":   item["grade"]/item['maxgrade']*100*item['percentage']
+           }
+
+           populateGradeBook(data);
+           console.log(results);
+       });
+    });
 }
 
 
