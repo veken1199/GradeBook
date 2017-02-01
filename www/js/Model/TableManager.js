@@ -124,7 +124,13 @@ function loadGradeBookTable(gradebook) {
     db.transaction(function(tx){
         sql = "SELECT * FROM " + gradebook;
         tx.executeSql(sql,[],function (tx,results){
-            console.log(results);
+            $$.each((results.rows),function(index,element) {
+                
+                var computedData = itemCalculor(element);
+                populateGradeBook(computedData);
+
+                console.log(element);
+            });
         });
     });
 
@@ -140,14 +146,7 @@ function insertGrade(item,gradebook) {
                             item['maxgrade'],
                             item['item']
        ], function (tx,results){
-           var data = {
-               "grade"       :   item['grade'],
-               "percentage"  :   item['percentage'],
-               "recieved"    :   item["grade"]/item['maxgrade'],
-               "item"        :   item['item'],
-               "contribution":   item["grade"]/item['maxgrade']*100*item['percentage']
-           }
-
+           var data = itemCalculor(item);
            populateGradeBook(data);
            console.log(results);
        });
