@@ -2,6 +2,7 @@ var db;
 var name;
 var res;
 
+
 function loadDB(input) {
     db = window.openDatabase("app", "1.0", "classes", 100000);
     db.transaction(populateDB);
@@ -106,6 +107,25 @@ function isUniqueClass(form) {
     }, transaction_error);
 }
 
+function isUnqueGradeItem(item,gradeBook){
+    loadDB(gradeBook);
+    var name = item['item'];
+    db.transaction(function (tx) {
+        sql = "SELECT * FROM "+ gradeBook + " WHERE item =?"
+        tx.executeSql(sql,[name], function (tx,results) {
+            if(results.rows.length > 0){
+                successMessage('This component name already exists' , "Component Found");
+            }
+
+            else{
+                if(addGradeInfo(gradeBook,getAllGrades(gradeBook),item)){
+                    successMessage("Successfully added a new component", "Good Job!")
+                }
+            }
+        })
+    })
+}
+
 
 function deleteCLassModel(className) {
     loadDB("class");
@@ -120,20 +140,25 @@ function deleteCLassModel(className) {
 }
 
 function loadGradeBookTable(gradebook) {
-    loadDB(gradebook);
-    db.transaction(function(tx){
-        sql = "SELECT * FROM " + gradebook;
-        tx.executeSql(sql,[],function (tx,results){
-            $$.each((results.rows),function(index,element) {
-                
-                var computedData = itemCalculor(element);
-                populateGradeBook(computedData);
+    allItems = getAllGrades(gradebook);
 
-                console.log(element);
-            });
+    $$.each((results.rows),function(index,element) {
+        var computedData = itemCalculor(element);
+        populateGradeBook(computedData);
+        console.log(element);
+    });
+}
+
+
+function getAllGrades(gradeBook){
+    loadDB(gradebook);
+    db.transaction(function(tx) {
+        sql = "SELECT * FROM " + gradebook;
+        tx.executeSql(sql, [], function (tx, results) {
+            allItems = results.rows;
         });
     });
-
+    return allItems;
 }
 
 function insertGrade(item,gradebook) {
@@ -153,6 +178,14 @@ function insertGrade(item,gradebook) {
     });
 }
 
-
+function addGradeInfo(gradeBook,allItems,item){
+    if(validateGradebookLimit(allItems,item)){
+        insertGrade(item,gradeBook);
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
 

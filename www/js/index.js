@@ -118,13 +118,13 @@ function addGrade(cssSelector){
 
     if (formValidor(inputMapVar)) {
         
-        actual_grade = quickCalculate(inputMapVar);
+
         
         inserted_grade = inputMapVar[0].value;
         max_grade      = inputMapVar[1].value;
         weight         = inputMapVar[2].value;
         item_name      = inputMapVar[3].value;
-        contribution   = actual_grade * weight;
+
 
         var item = {
         "grade"     : inserted_grade,
@@ -133,8 +133,8 @@ function addGrade(cssSelector){
         "item"      : item_name
     };
 
-        insertGrade(item,sessionStorage.getItem("ClassName"));
-        alert(contribution);
+        isUnqueGradeItem(item,sessionStorage.getItem("ClassName"));
+
     }
 }
 
