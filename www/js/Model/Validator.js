@@ -13,3 +13,20 @@ function formValidor(form){
 function isReserverdWord(word){
     return word.includes('#');
 }
+
+function validateGradebookLimit(items, newItem){
+    var sum;
+
+    $$.each(items,function (index,item) {
+        sum = (item["grade"]/item['maxgrade'] * 100).toFixed(3);
+    })
+    var insertedPercentage = (newItem["grade"] / newItem["maxgrade"] * 100).toFixed(3);
+    if ( (sum + insertedPercentage) > 100 ){
+        successMessage("You are trying to go beyond the limits", "gradeOverFlow");
+        return false;
+    }
+    else{
+        return true;
+    }
+
+}
