@@ -107,6 +107,7 @@ function isUniqueClass(form) {
     }, transaction_error);
 }
 
+//commet
 function isUnqueGradeItem(item,gradeBook){
     loadDB(gradeBook);
     var name = item['item'];
@@ -139,10 +140,23 @@ function deleteCLassModel(className) {
     });
 }
 
-function loadGradeBookTable(gradebook) {
-    allItems = getAllGrades(gradebook);
+function deleteGradeModel(itemName, gradeBook){
+    loadDB(gradeBook);
+    db.transaction(function(tx){
+       sql = "DELETE FROM " + gradeBook + "WHERE item =?";
+       tx.executeSql(sql,[itemName], function(tx,results){
+            removeItemFromGradeList(itemName);
+            var allGrades = getAllGrades(gradeBook);
+            var gradeBookStats = gradeBookStats(allGrades);
 
-    $$.each((results.rows),function(index,element) {
+            //TODO view the changes on the ui when deleting a grade.
+        });
+    });
+}
+
+function loadGradeBookTable(allItems) {
+
+    $$.each(allItems,function(index,element) {
         var computedData = itemCalculor(element);
         populateGradeBook(computedData);
         console.log(element);
@@ -151,11 +165,15 @@ function loadGradeBookTable(gradebook) {
 
 
 function getAllGrades(gradeBook){
-    loadDB(gradebook);
+    var allItems;
+
+    loadDB(gradeBook);
+
     db.transaction(function(tx) {
-        sql = "SELECT * FROM " + gradebook;
+        sql = "SELECT * FROM " + gradeBook;
         tx.executeSql(sql, [], function (tx, results) {
             allItems = results.rows;
+            loadGradeBookTable(allItems);
         });
     });
     return allItems;

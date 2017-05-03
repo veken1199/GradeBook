@@ -98,7 +98,7 @@ function deleteClass(className) {
 
 function openClass(className) {
     mainView.router.load({ url: "Class.html" });
-    loadGradeBookTable(className);
+    getAllGrades(className);
     $$('#class-title').text(className);
     sessionStorage.setItem("ClassName",className)
 }
@@ -136,6 +136,10 @@ function addGrade(cssSelector){
         isUnqueGradeItem(item,sessionStorage.getItem("ClassName"));
 
     }
+}
+
+function deleteGrede(itemName){
+    deleteGradeModel(itemName,sessionStorage.getItem("ClassName"));
 }
 
 
