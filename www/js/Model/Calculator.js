@@ -69,5 +69,5 @@ function itemCalculor(item){
 }
 
 function calculateGradeBookStats(items){
-
+    
 }

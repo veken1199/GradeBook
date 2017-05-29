@@ -76,7 +76,6 @@ myApp.onPageInit('ClassBook', function (page) {
 
 function calculate(cssSelector) {
     var inputMapVar = $$('input[name*="' + cssSelector + '"]');
-
     if (formValidor(inputMapVar)) {
         var total = quickCalculate(inputMapVar);
         var state1 = setState(total);
@@ -90,7 +89,6 @@ function addClass(cssSelector) {
     if (formValidor(inputMapVar)) {
         isUniqueClass(inputMapVar);
     }
-
 }
 
 
@@ -100,8 +98,48 @@ function deleteClass(className) {
 
 function openClass(className) {
     mainView.router.load({ url: "Class.html" });
-    myApp.onPageInit('Class', function (page) {
-        $$('#class-title').text(className);
-              
-    });
+    getAllGrades(className);
+    $$('#class-title').text(className);
+    sessionStorage.setItem("ClassName",className)
 }
+
+function addGrade(cssSelector){
+
+    var inserted_grade;
+    var actual_grade;
+    var contribution;
+    var weight;
+    var max_grade;
+    var item_name;
+
+
+
+    var inputMapVar = $$('input[name*="' + cssSelector + '"]');
+
+    if (formValidor(inputMapVar)) {
+        
+
+        
+        inserted_grade = inputMapVar[0].value;
+        max_grade      = inputMapVar[1].value;
+        weight         = inputMapVar[2].value;
+        item_name      = inputMapVar[3].value;
+
+
+        var item = {
+        "grade"     : inserted_grade,
+        "percentage": weight,
+        "maxgrade"  : max_grade,
+        "item"      : item_name
+    };
+
+        isUnqueGradeItem(item,sessionStorage.getItem("ClassName"));
+
+    }
+}
+
+function deleteGrede(itemName){
+    deleteGradeModel(itemName,sessionStorage.getItem("ClassName"));
+}
+
+

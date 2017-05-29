@@ -41,3 +41,4 @@ function getCLassTemplate(obj){
 function removeFromList(title){
    $$('#'+ title.replace(/\s/g,'')+ '').remove(); 
 }
+

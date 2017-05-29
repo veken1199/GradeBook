@@ -98,12 +98,15 @@ function deleteClass(className) {
 
 function openClass(className) {
     mainView.router.load({ url: "Class.html" });
-    getAllGrades(className);
+    var allGrades = getAllGrades(className);
+    
     $$('#class-title').text(className);
     sessionStorage.setItem("ClassName",className)
 }
 
 function addGrade(cssSelector){
+
+    
 
     var inserted_grade;
     var actual_grade;
@@ -112,19 +115,14 @@ function addGrade(cssSelector){
     var max_grade;
     var item_name;
 
-
-
     var inputMapVar = $$('input[name*="' + cssSelector + '"]');
 
     if (formValidor(inputMapVar)) {
-        
 
-        
         inserted_grade = inputMapVar[0].value;
         max_grade      = inputMapVar[1].value;
         weight         = inputMapVar[2].value;
         item_name      = inputMapVar[3].value;
-
 
         var item = {
         "grade"     : inserted_grade,
@@ -133,8 +131,10 @@ function addGrade(cssSelector){
         "item"      : item_name
     };
 
-        isUnqueGradeItem(item,sessionStorage.getItem("ClassName"));
+        new_grade = new Grade(inputMapVar, sessionStorage.getItem("ClassName"));
+        new_grade.validateGrade();
 
+        isUnqueGradeItem(item,sessionStorage.getItem("ClassName"));
     }
 }
 

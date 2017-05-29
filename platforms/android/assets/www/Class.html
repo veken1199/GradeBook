@@ -1,26 +1,85 @@
-<div data-page="Class" class="page">
-  <div class="navbar">
-    <div class="navbar-inner">
-      <div class="left"><a href="index.html" class="back link icon-only"><i class="icon icon-back"></i></a></div>
-      <div class="center"><div id="class-title"></div>
-     
-      </div>
-      <div class="right"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div>
+<div data-page="Class" class="page" style="font-size: 40%!important;">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="left"><a href="index.html" class="back link icon-only"><i class="icon icon-back"></i></a></div>
+            <div class="center">
+                <div id="class-title"></div>
+
+            </div>
+            <div class="right"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div>
+        </div>
     </div>
-  </div>
-  <div class="page-content">
-    <div class="content-block-title">Welcome to Framework7</div>
-    <div class="content-block">
-      <p>Framework7 - is a free and open source HTML mobile framework to develop hybrid mobile apps or web apps with iOS or
-        Android (Material) native look and feel. It is also an indispensable prototyping apps tool to show working app prototype
-        as soon as possible in case you need to. Framework7 is created by Vladimir Kharlampidi (iDangero.us).</p>
-      <p>The main approach of the Framework7 is to give you an opportunity to create iOS and Android (Material) apps with HTML,
-        CSS and JavaScript easily and clear. Framework7 is full of freedom. It doesn't limit your imagination or offer ways
-        of any solutions somehow. Framework7 gives you freedom!</p>
-      <p>Framework7 is not compatible with all platforms. It is focused only on iOS and Android (Material) to bring the best
-        experience and simplicity.</p>
-      <p>Framework7 is definitely for you if you decide to build iOS and Android hybrid app (PhoneGap) or web app that looks
-        like and feels as great native iOS or Android (Material) apps.</p>
+    <div class="page-content">
+        <div class="content-block-title">Welcome to Framework7</div>
+        <div class="content-block">
+            <div class="list-block">
+                <ul>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon f7-icons">Your Grade</i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input type="number" placeholder="Your Grade | 34/50 your grade is 34"
+                                           name="grade_c">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon f7-icons">Max Grade</i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input type="number" placeholder="Max Grade | 34/50 max grade is 50" name="max_c">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon f7-icons">Percentage</i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input type="number" placeholder="Weight of the exam/quiz/project" name="weight_c">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon f7-icons">Component Name</i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input type="text" placeholder="quiz 1/ midterm 2 ..." name="max_c">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <p class="buttons-row">
+                    <a href="#" class="button button-raised button-fill color-cyan"
+                       onclick="addGrade('_c')">Calculate</a>
+                </p>
+
+                <div class="content-block-title">
+                    <h1>Your Grade Book<h1>
+                </div>
+                <div class="content-block" id="Class-Item-List">
+                <div class="row">
+                    <div class="col-20 Grade"><p>Item</p></div>
+                    <div class="col-20 Grade"><p>Grade</p></div>
+                    <div class="col-20 Grade"><p>Grade %</p></div>
+                    <div class="col-20 Grade"><p>Per %</p></div>
+                    <div class="col-20 Grade"><p>Contributes</p></div>
+                </div>
+            </div>
+        </div>
+
     </div>
-  </div>
 </div>

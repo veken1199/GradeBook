@@ -2,11 +2,16 @@
 function formValidor(form){
     isValid = true;
     $$.each(form,function(index,obj){
-        if(obj.value==""&&!isReserverdWord(obj.value)){
+        if(obj.value==""&&!isReserverdWord(obj.value)&&isValid){
             isValid=false
             $$(obj).parent().parent().addClass("focus-state");
         }
     });
+
+    if(!isValid){
+        successMessage("One of the fields is empty", "Missing Field");
+        return isValid;
+    }
     return isValid;
 }
 
