@@ -1,8 +1,10 @@
-function obj_Class(class_selector){
+
+
+function Obj_Class(class_selector){
       this.inputMapVar = class_selector;
 }
 
-Class_name.prototype.addNewClass = function(){
+Obj_Class.prototype.addNewClass = function(){
       if (formValidor(this.inputMapVar)) {
         isUniqueClass(inputMapVar);
     }

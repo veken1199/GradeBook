@@ -69,8 +69,6 @@ myApp.onPageInit('ClassBook', function (page) {
     if(db==null||page.fromPage.name=="index"){
         loadClassTable();
     }
-  
-    
 });
 
 
@@ -105,9 +103,6 @@ function openClass(className) {
 }
 
 function addGrade(cssSelector){
-
-    
-
     var inserted_grade;
     var actual_grade;
     var contribution;
@@ -132,11 +127,10 @@ function addGrade(cssSelector){
     };
 
         new_grade = new Grade(inputMapVar, sessionStorage.getItem("ClassName"));
-        new_grade.validateGrade();
-
-        isUnqueGradeItem(item,sessionStorage.getItem("ClassName"));
+        new_grade.addGrade();
     }
 }
+
 
 function deleteGrede(itemName){
     deleteGradeModel(itemName,sessionStorage.getItem("ClassName"));

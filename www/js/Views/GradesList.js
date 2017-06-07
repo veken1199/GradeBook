@@ -1,6 +1,14 @@
 function populateGradeBook(data) {
-    
+     
 
+    // var initial_html = ' <div class="row">'+
+    //                     '<div class="col-20 Grade"><p>Item</p></div>'+
+    //                     '<div class="col-20 Grade"><p>Grade</p></div>'+
+    //                     '<div class="col-20 Grade"><p>Grade %</p></div>'+
+    //                     '<div class="col-20 Grade"><p>Per %</p></div>'+
+    //                     '<div class="col-20 Grade"><p>Contributes</p></div></div>';
+    
+    
     var item_color = " ";
 
     if(data['recieved'] > 80)

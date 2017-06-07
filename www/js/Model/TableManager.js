@@ -60,8 +60,6 @@ function getData_success(tx, results) {
 
 }
 
-
-
 function success_callback() {
     return loadClassTable();
 }

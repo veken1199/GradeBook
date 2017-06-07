@@ -63,18 +63,22 @@ function addGradeInfo(gradeBook,allItems,item){
     }
 }
 
-function isUnqueGradeItem(item,gradeBook){
-    loadDB(gradeBook);
+//this is where adding a new grade prcess starts
+//we check if the grade is unique, if yes => we add the grade through add grade info
+//else we promote that the grade name already exists. 
+//item is a grade object which. 
+function isUnqueGradeItem(item,gradeBookName){
+    loadDB(gradeBookName);
     var name = item['item'];
     db.transaction(function (tx) {
-        sql = "SELECT * FROM "+ gradeBook + " WHERE item =?"
+        sql = "SELECT * FROM "+ gradeBookName + " WHERE item =?"
         tx.executeSql(sql,[name], function (tx,results) {
             if(results.rows.length > 0){
                 successMessage('This component name already exists' , "Component Found");
             }
 
             else{
-                if(addGradeInfo(gradeBook,getAllGrades(gradeBook),item)){
+                if(addGradeInfo(gradeBookName,getAllGrades(gradeBookName),item)){
                     myApp.closeModal('.popup-add-grade');
                     successMessage("Successfully added a new component", "Good Job!")
                 }
