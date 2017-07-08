@@ -6,7 +6,6 @@ function loadClassList(classList){
     });
 }
 
-
 function addToClassList(form){
     var obj = {
         title:form[0].value,
@@ -41,3 +40,4 @@ function getCLassTemplate(obj){
 function removeFromList(title){
    $$('#'+ title.replace(/\s/g,'')+ '').remove(); 
 }
+

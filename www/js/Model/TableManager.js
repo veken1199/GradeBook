@@ -60,132 +60,37 @@ function getData_success(tx, results) {
 
 }
 
-
-function addClassModel(form) {
-    loadDB("class");
-    title = form[0].value;
-    desc = form[1].value;
-    db.transaction(insertClass, transaction_error);
-}
-
-function insertClass(tx) {
-    tx.executeSql('INSERT INTO class (title,content) VALUES ( ?, ?)', [title, desc],
-        function (tx, results) {
-
-            myApp.closeModal('.popup-about');
-            successMessage('Successfull added a class', 'Good One!');
-        });
-}
-
-function loadClassTable() {
-    loadDB("class");
-    return db.transaction(getClassContent, transaction_error);
-}
-
 function success_callback() {
     return loadClassTable();
 }
 
-function isUniqueClass(form) {
-    var flag;
-    loadDB("class");
-    title = form[0].value;
-    desc = form[1].value;
-    db.transaction(function (tx) {
-        sql = "SELECT title FROM " + name + " WHERE title=?";
-        tx.executeSql(sql, [title], function (tx, results) {
-            flag = results.rows.length == 0;
-            if (!flag) {
-                successMessage('Class name Already Exists!', 'Class Found');
-            }
-            else {
-                addClassModel(form);
-                addToClassList(form);
 
-            }
-        });
-    }, transaction_error);
+function getGradebook(){
+    var gradebook = JSON.parse(localStorage.getItem("gradebook"));
+    return gradebook;
 }
 
-function isUnqueGradeItem(item,gradeBook){
-    loadDB(gradeBook);
-    var name = item['item'];
-    db.transaction(function (tx) {
-        sql = "SELECT * FROM "+ gradeBook + " WHERE item =?"
-        tx.executeSql(sql,[name], function (tx,results) {
-            if(results.rows.length > 0){
-                successMessage('This component name already exists' , "Component Found");
-            }
-
-            else{
-                if(addGradeInfo(gradeBook,getAllGrades(gradeBook),item)){
-                    successMessage("Successfully added a new component", "Good Job!")
-                }
-            }
-        })
-    })
+function getClassFromBook(class_name){
+    gradebook = getGradebook();
+    return gradebook[class_name];
 }
 
-
-function deleteCLassModel(className) {
-    loadDB("class");
-    db.transaction(function (tx) {
-        sql = "DELETE FROM " + name + " WHERE title=?";
-        tx.executeSql(sql, [className], function (tx, results) {
-            //delete From list 
-            removeFromList(className);
-        });
-
-    });
+// class info is json obj in the following format:
+//          {'title' : 'class_name',
+//          'content: 'class_description'};
+function addClassToGradeBook(class_info){
+    gradebook = getGradebook();
+    gradebook[class_info['title']] = class_info;
+    storeInLocalStorage(gradebook, 'gradebook');
 }
 
-function loadGradeBookTable(gradebook) {
-    allItems = getAllGrades(gradebook);
-
-    $$.each((results.rows),function(index,element) {
-        var computedData = itemCalculor(element);
-        populateGradeBook(computedData);
-        console.log(element);
-    });
+function removeClassFromGradeBook(class_name){
+    gradebook = getGradebook();
+    delete gradebook[class_name];
+    storeInLocalStorage(gradebook, 'gradebook');
 }
 
-
-function getAllGrades(gradeBook){
-    loadDB(gradebook);
-    db.transaction(function(tx) {
-        sql = "SELECT * FROM " + gradebook;
-        tx.executeSql(sql, [], function (tx, results) {
-            allItems = results.rows;
-        });
-    });
-    return allItems;
+// takes json obj and localstorage key
+function storeInLocalStorage(json_obj, storage_key){
+    localStorage.setItem(storage_key, JSON.stringify(json_obj));
 }
-
-function insertGrade(item,gradebook) {
-    loadDB(gradebook);
-    db.transaction(function(tx) {
-       sql = "INSERT INTO " + gradebook + " (grade,percentage,maxgrade,item)  VALUES (?,?,?,?)" ;
-       tx.executeSql(sql,[
-                            item['grade'],
-                            item['percentage'],
-                            item['maxgrade'],
-                            item['item']
-       ], function (tx,results){
-           var data = itemCalculor(item);
-           populateGradeBook(data);
-           console.log(results);
-       });
-    });
-}
-
-function addGradeInfo(gradeBook,allItems,item){
-    if(validateGradebookLimit(allItems,item)){
-        insertGrade(item,gradeBook);
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-

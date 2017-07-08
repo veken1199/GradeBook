@@ -51,6 +51,8 @@ var app = {
 */
 
 //framework 7 instantiation 
+var loaded_class = null; 
+var grade_item = null;
 
 var myApp = new Framework7({
     material: true
@@ -69,14 +71,10 @@ myApp.onPageInit('ClassBook', function (page) {
     if(db==null||page.fromPage.name=="index"){
         loadClassTable();
     }
-  
-    
 });
-
 
 function calculate(cssSelector) {
     var inputMapVar = $$('input[name*="' + cssSelector + '"]');
-
     if (formValidor(inputMapVar)) {
         var total = quickCalculate(inputMapVar);
         var state1 = setState(total);
@@ -90,7 +88,6 @@ function addClass(cssSelector) {
     if (formValidor(inputMapVar)) {
         isUniqueClass(inputMapVar);
     }
-
 }
 
 
@@ -100,8 +97,20 @@ function deleteClass(className) {
 
 function openClass(className) {
     mainView.router.load({ url: "Class.html" });
-    myApp.onPageInit('Class', function (page) {
-        $$('#class-title').text(className);
-              
-    });
+    loaded_class = new Obj_Class(null, className);
+    loaded_class.loadClass();
+    $$('#class-title').text(className);
+    sessionStorage.setItem("ClassName", className);
 }
+
+function addGrade(cssSelector){
+    var inputMapVar = $$('input[name*="' + cssSelector + '"]');
+    grade_item = new Grade(inputMapVar, sessionStorage.getItem("ClassName"));
+    grade_item.addGrade();
+}
+
+function deleteGrade(itemName){
+    deleteGradeModel(itemName, loaded_class);
+}
+
+
