@@ -6,7 +6,6 @@ function loadClassList(classList){
     });
 }
 
-
 function addToClassList(form){
     var obj = {
         title:form[0].value,

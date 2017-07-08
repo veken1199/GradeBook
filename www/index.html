@@ -22,19 +22,20 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="user-scalable=no,initial-scale=1 initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta charset="utf-8" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="viewport" content="user-scalable=no,initial-scale=1 initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"
+  />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <link rel="stylesheet" type="text/css" href="font-awesome-4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="font-awesome-4.6.3/css/font-awesome.min.css">
 
-    <!-- This is a wide open CSP declaration. To lock this down for production, see below.
+  <!-- This is a wide open CSP declaration. To lock this down for production, see below.
     <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
     -->
-    <!-- Good default declaration:
+  <!-- Good default declaration:
     * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
     * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
     * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
@@ -42,194 +43,182 @@
         * Enable eval(): add 'unsafe-eval' to default-src
     * Create your own at http://cspisawesome.com
     -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 
-    <!-- Path to Framework7 iOS CSS theme styles-->
-    <link rel="stylesheet" href="css/framework7.material.colors.min.css">
-    <!-- Path to Framework7 iOS related color styles -->
-    <link rel="stylesheet" href="css/framework7.material.min.css">
-    <!-- Path to your custom app styles-->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <!-- Path to Framework7 iOS CSS theme styles-->
+  <link rel="stylesheet" href="css/framework7.material.colors.min.css">
+  <!-- Path to Framework7 iOS related color styles -->
+  <link rel="stylesheet" href="css/framework7.material.min.css">
+  <!-- Path to your custom app styles-->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-    
-    <title>Grade Book</title>
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+  <title>Grade Book</title>
 </head>
 
 
-<body class="theme-deeporange layout-dark" >
-  <div class="popup popup-about">    
-      <div class="list-block layout-dark ">
-          <ul>
-    <!-- Text inputs -->
-            <li>
-              <div class="item-content">
-                <div class="item-media" style="color:white"><i class="icon f7-icons">Class Name</i></div>
-                <div class="item-inner">
-                  <div class="item-input">
-                    <input type="text" placeholder="insert class name" maxlength="20" name="className_a">
-                  </div>
-                </div>
+<body class="theme-deeporange layout-dark">
+  <div class="popup popup-about">
+    <div class="list-block layout-dark ">
+      <ul>
+        <!-- Text inputs -->
+        <li>
+          <div class="item-content">
+            <div class="item-media" style="color:white"><i class="icon f7-icons">Class Name</i></div>
+            <div class="item-inner">
+              <div class="item-input">
+                <input type="text" placeholder="insert class name" maxlength="20" name="className_a">
               </div>
-            </li>
-
-            <li>
-              <div class="item-content">
-               <div class="item-media" style="color:white"><i class="icon f7-icons">Description</i></div>
-                <div class="item-inner">
-                  <div class="item-input">
-                    <input type="text" placeholder="small Description" maxlength="20" name="Descripton_a">
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-
-        <p class="buttons-row">
-          <a href="#" class="button button-raised button-fill color-cyan" onclick="addClass('_a')">Calculate</a>
-        </p>
-
-      <p><a href="#" class="close-popup">Close</a></p>      
-  </div>
-</div>
-
-<div class="popup popup-add-grade" style="background: #333333">    
-      <div class="list-block layout-dark ">
-                <ul>
-                    <!-- Text inputs -->
-                    <li>
-                        <div class="item-content">
-                            <div class="item-media" style="color:white"><i class="icon f7-icons">Your Grade</i></div>
-                            <div class="item-inner">
-                                <div class="item-input">
-                                    <input type="number" placeholder="Your Grade | 34/50 your grade is 34"
-                                           name="grade_c">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="item-content">
-                            <div class="item-media"style="color:white"><i class="icon f7-icons">Max Grade</i></div>
-                            <div class="item-inner">
-                                <div class="item-input">
-                                    <input type="number" placeholder="Max Grade | 34/50 max grade is 50" name="max_c">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-
-                    <li>
-                        <div class="item-content">
-                            <div class="item-media"style="color:white"><i class="icon f7-icons">Percentage</i></div>
-                            <div class="item-inner">
-                                <div class="item-input">
-                                    <input type="number" placeholder="Weight of the exam/quiz/project" name="weight_c">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="item-content">
-                            <div class="item-media"style="color:white"><i class="icon f7-icons">Component Name</i></div>
-                            <div class="item-inner">
-                                <div class="item-input">
-                                    <input type="text" placeholder="quiz 1/ midterm 2 ..." name="max_c">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-
-                <p class="buttons-row">
-                    <a href="#" class="button button-raised button-fill color-cyan"
-                       onclick="addGrade('_c')">Calculate</a>
-                </p>
-        <p><a href="#" class="close-popup">Close</a></p>      
-  </div>
-</div>
-
-     <!-- Views -->
-    <div class="views">
-      <!-- Your main view, should have "view-main" class -->
-      <div class="view view-main">
-        <!-- Pages container, because we use fixed navbar and toolbar, it has additional appropriate classes-->
-        <div class="pages ">
-          <!-- Page, "data-page" contains page name -->
-          <div data-page="index" class="page">
- 
-            <!-- Top Navbar. In Material theme it should be inside of the page-->
-            <div class="navbar">
-              <div class="navbar-inner">
-                <div class="center">Awesome App</div>
-              </div>
-            </div>
- 
-            <!-- Toolbar. In Material theme it should be inside of the page-->
-            <div class="toolbar">
-              <div class="toolbar-inner">
-                <!-- Toolbar links -->
-                <a href="#" class="link">Link 1</a>
-                <a href="#" class="link">Link 2</a>
-              </div>
-            </div>
- 
-            <!-- Scrollable page content -->
-            <div class="page-content">
-              <p>Page content goes here</p>
-            
-    <!-- Each "cell" has col-[widht in percents] class -->
-                <div class="row">
-                  <div class="col-50" style="text-align:center" >
-                    <div class='social-box'>
-                        <a href="Calculator.html"><i class='fa fa-calculator' ></i></a>
-                        <p>Quick Calculator</p>
-                    </div>
-                  </div>
-
-                  <div class="col-50" style="text-align:center" >
-                    <div class='social-box'>
-                        <a href="ClassBook.html"><i class='fa fa-book'></i></a>
-                        <p>Class Book</p>
-                    </div>
-                  </div>
-
-                  <div class="col-100" style="text-align:center" >
-                    <div class='social-box'>
-                        <a href="http://twitter.com"><i class='fa fa-list-alt'></i></a>
-                        <p>GPA Book</p>
-                    </div>
-                  </div>
-                  
-
-                  </div>
-
-                </div>
-
-              <a href="about.html">About app</a>
             </div>
           </div>
+        </li>
+
+        <li>
+          <div class="item-content">
+            <div class="item-media" style="color:white"><i class="icon f7-icons">Description</i></div>
+            <div class="item-inner">
+              <div class="item-input">
+                <input type="text" placeholder="small Description" maxlength="20" name="Descripton_a">
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <p class="buttons-row">
+        <a href="#" class="button button-raised button-fill color-cyan" onclick="addClass('_a')">Calculate</a>
+      </p>
+
+      <p><a href="#" class="close-popup">Close</a></p>
+    </div>
+  </div>
+
+  <div class="popup popup-add-grade" style="background: #333333">
+    <div class="list-block layout-dark ">
+      <ul>
+        <!-- Text inputs -->
+        <li>
+          <div class="item-content">
+            <div class="item-media" style="color:white"><i class="icon f7-icons">Your Grade</i></div>
+            <div class="item-inner">
+              <div class="item-input">
+                <input type="number" placeholder="Your Grade | 34/50 your grade is 34" name="grade_c">
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="item-content">
+            <div class="item-media" style="color:white"><i class="icon f7-icons">Max Grade</i></div>
+            <div class="item-inner">
+              <div class="item-input">
+                <input type="number" placeholder="Max Grade | 34/50 max grade is 50" name="max_c">
+              </div>
+            </div>
+          </div>
+        </li>
+
+
+        <li>
+          <div class="item-content">
+            <div class="item-media" style="color:white"><i class="icon f7-icons">Percentage</i></div>
+            <div class="item-inner">
+              <div class="item-input">
+                <input type="number" placeholder="Weight of the exam/quiz/project" name="weight_c">
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="item-content">
+            <div class="item-media" style="color:white"><i class="icon f7-icons">Component Name</i></div>
+            <div class="item-inner">
+              <div class="item-input">
+                <input type="text" placeholder="quiz 1/ midterm 2 ..." name="max_c">
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <p class="buttons-row">
+        <a href="#" class="button button-raised button-fill color-cyan" onclick="addGrade('_c')">Calculate</a>
+      </p>
+      <p><a href="#" class="close-popup">Close</a></p>
+    </div>
+  </div>
+
+  <!-- Views -->
+  <div class="views">
+    <!-- Your main view, should have "view-main" class -->
+    <div class="view view-main">
+      <!-- Pages container, because we use fixed navbar and toolbar, it has additional appropriate classes-->
+      <div class="pages ">
+        <!-- Page, "data-page" contains page name -->
+        <div data-page="index" class="page">
+
+          <!-- Top Navbar. In Material theme it should be inside of the page-->
+          <div class="navbar">
+            <div class="navbar-inner">
+              <div class="center">Grade Book</div>
+            </div>
+          </div>
+
+
+          <!-- Scrollable page content -->
+          <div class="page-content">
+            <p>Page content goes here</p>
+
+            <!-- Each "cell" has col-[widht in percents] class -->
+            <div class="row">
+              <div class="col-50" style="text-align:center">
+                <div class='social-box'>
+                  <a href="Calculator.html"><i class='fa fa-calculator' ></i></a>
+                  <p>Quick Calculator</p>
+                </div>
+              </div>
+
+              <div class="col-50" style="text-align:center">
+                <div class='social-box'>
+                  <a href="ClassBook.html"><i class='fa fa-book'></i></a>
+                  <p>Class Book</p>
+                </div>
+              </div>
+
+              <div class="col-100" style="text-align:center">
+                <div class='social-box'>
+                  <a href="http://twitter.com"><i class='fa fa-list-alt'></i></a>
+                  <p>GPA Book</p>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+          <a href="about.html">About app</a>
         </div>
       </div>
     </div>
+  </div>
+  </div>
 
-    <script type="text/javascript" src="js/framework7.js"></script>
-    <script type="text/javascript" src="js/Model/ClassTDG.js"></script>
-    <script type="text/javascript" src="js/Model/GradeTDG.js"></script>
-    <script type="text/javascript" src="js/Model/Calculator.js"></script>
-    <script type="text/javascript" src="js/Model/Validator.js"> </script>
-    <script type="text/javascript" src="js/Model/TableManager.js"> </script>
-    <script type="text/javascript" src="js/Views/GradesList.js"> </script>
-    <script type="text/javascript" src="js/Objects/Obj_Class.js"> </script>
-    <script type="text/javascript" src="js/Objects/Obj_Grade.js"> </script>
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript" src="js/Model/ErrorHandler.js"> </script>
-     <script type="text/javascript" src="js/Views/ClassList.js"> </script>
-    
+  <script type="text/javascript" src="js/framework7.js"></script>
+  <script type="text/javascript" src="js/Model/ClassTDG.js"></script>
+  <script type="text/javascript" src="js/Model/GradeTDG.js"></script>
+  <script type="text/javascript" src="js/Model/Calculator.js"></script>
+  <script type="text/javascript" src="js/Model/Validator.js"></script>
+  <script type="text/javascript" src="js/Model/TableManager.js"></script>
+  <script type="text/javascript" src="js/Views/GradesList.js"></script>
+  <script type="text/javascript" src="js/Objects/Obj_Class.js"></script>
+  <script type="text/javascript" src="js/Objects/Obj_Grade.js"></script>
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript" src="js/Model/ErrorHandler.js"></script>
+  <script type="text/javascript" src="js/Views/ClassList.js"></script>
+  <script type="text/javascript" src="js/Test/testValues.js"></script>
 
 </body>
 

@@ -27,7 +27,7 @@ function populateGradeBook(data) {
             '<div class="col-20 Grade"><p>' + data['grade'] + '</p></div>' +
             '<div class="col-20 Grade"><p>' + data['recieved'] + '</p></div>' +
             '<div class="col-20 Grade"><p>' + data['percentage'] + '</p></div>' +
-            '<div class="col-20 Grade"><p>' + data['contribution'] + '<a href="#" onclick="deleteGrade("'+data['item']+'")">  Delete</a></p></div>'
+            '<div class="col-20 Grade"><p>' + data['contribution'] + '<a href="#" onclick="deleteGrade(\''+data['item']+'\');">  Delete</a></p></div>'
         '</div>';
     
     $$('#Class-Item-List').append(html);
@@ -36,8 +36,4 @@ function populateGradeBook(data) {
 
 function removeItemFromGradeList(title){
      $$('#'+ title.replace(/\s/g,'')+ '').remove();
-}
-
-function addGradeToList(){
-      
 }

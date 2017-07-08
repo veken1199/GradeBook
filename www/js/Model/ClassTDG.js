@@ -1,22 +1,22 @@
-function addClassModel(form) {
-    loadDB("class");
-    title = form[0].value;
-    desc = form[1].value;
-    db.transaction(insertClass, transaction_error);
-}
 
-function insertClass(tx) {
-    tx.executeSql('INSERT INTO class (title,content) VALUES ( ?, ?)', [title, desc],
-        function (tx, results) {
-
-            myApp.closeModal('.popup-about');
-            successMessage('Successfull added a class', 'Good One!');
-        });
+//take class_obj obj and then we need to create json obj from this
+function insertClass(class_obj) {
+    json_class = class_obj.toJSON();
+    addClassToGradeBook(json_class);
+    myApp.closeModal('.popup-about');
+    
 }
 
 function loadClassTable() {
-    loadDB("class");
-    return db.transaction(getClassContent, transaction_error);
+    testValues();
+    gradebook = getGradebook();
+    if (gradebook ==null){
+        return successMessage('Plaese Add Classes', 'NO Classes!');
+    }
+
+    else{
+        loadClassList(gradebook);
+    }
 }
 
 
@@ -32,22 +32,14 @@ function deleteCLassModel(className) {
     });
 }
 
-function isUniqueClass(form) {
-    var flag;
-    loadDB("class");
-    title = form[0].value;
-    desc = form[1].value;
-    db.transaction(function (tx) {
-        sql = "SELECT title FROM " + name + " WHERE title=?";
-        tx.executeSql(sql, [title], function (tx, results) {
-            flag = results.rows.length == 0;
-            if (!flag) {
-                successMessage('Class name Already Exists!', 'Class Found');
-            }
-            else {
-                addClassModel(form);
-                addToClassList(form);
-            }
-        });
-    }, transaction_error);
+function isUniqueClassTDG(class_name) {
+    var gradebook = getGradebook(); 
+    
+    if (gradebook[class_name]){
+       successMessage('Class name Already Exists!', 'Class Found');
+       return false;
+    }
+    else{
+        return true;   
+    }    
 }

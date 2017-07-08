@@ -51,6 +51,8 @@ var app = {
 */
 
 //framework 7 instantiation 
+var loaded_class = null; 
+var grade_item = null;
 
 var myApp = new Framework7({
     material: true
@@ -71,7 +73,6 @@ myApp.onPageInit('ClassBook', function (page) {
     }
 });
 
-
 function calculate(cssSelector) {
     var inputMapVar = $$('input[name*="' + cssSelector + '"]');
     if (formValidor(inputMapVar)) {
@@ -84,8 +85,9 @@ function calculate(cssSelector) {
 
 function addClass(cssSelector) {
     var inputMapVar = $$('input[name*="' + cssSelector + '"]');
-    if (formValidor(inputMapVar)) {
-        isUniqueClass(inputMapVar);
+    var new_class = new Obj_Class(inputMapVar);
+    if(new_class.isUnique() && new_class.validate()){
+        new_class.addNewClass();
     }
 }
 
@@ -96,44 +98,20 @@ function deleteClass(className) {
 
 function openClass(className) {
     mainView.router.load({ url: "Class.html" });
-    var allGrades = getAllGrades(className);
-    
+    loaded_class = new Obj_Class(null, className);
+    loaded_class.loadClass();
     $$('#class-title').text(className);
-    sessionStorage.setItem("ClassName",className)
+    sessionStorage.setItem("ClassName", className);
 }
 
 function addGrade(cssSelector){
-    var inserted_grade;
-    var actual_grade;
-    var contribution;
-    var weight;
-    var max_grade;
-    var item_name;
-
     var inputMapVar = $$('input[name*="' + cssSelector + '"]');
-
-    if (formValidor(inputMapVar)) {
-
-        inserted_grade = inputMapVar[0].value;
-        max_grade      = inputMapVar[1].value;
-        weight         = inputMapVar[2].value;
-        item_name      = inputMapVar[3].value;
-
-        var item = {
-        "grade"     : inserted_grade,
-        "percentage": weight,
-        "maxgrade"  : max_grade,
-        "item"      : item_name
-    };
-
-        new_grade = new Grade(inputMapVar, sessionStorage.getItem("ClassName"));
-        new_grade.addGrade();
-    }
+    grade_item = new Grade(inputMapVar, sessionStorage.getItem("ClassName"));
+    grade_item.addGrade();
 }
 
-
-function deleteGrede(itemName){
-    deleteGradeModel(itemName,sessionStorage.getItem("ClassName"));
+function deleteGrade(itemName){
+    deleteGradeModel(itemName, loaded_class);
 }
 
 
