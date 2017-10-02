@@ -8,8 +8,8 @@ function loadClassList(classList){
 
 function addToClassList(form){
     var obj = {
-        title:form[0].value,
-        content:form[1].value
+        title:form.title,
+        content:form.content
     };
     var html = getCLassTemplate(obj);
     $$('.mmjm').append(html);
