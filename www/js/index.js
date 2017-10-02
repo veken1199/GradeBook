@@ -68,9 +68,13 @@ var mainView = myApp.addView('.view-main', {
 });
 
 myApp.onPageInit('ClassBook', function (page) {
-    if(db==null||page.fromPage.name=="index"){
+    if(page.fromPage.name=="index"){
         loadClassTable();
     }
+});
+
+myApp.onPageInit('Class', function (page) {
+   
 });
 
 function calculate(cssSelector) {
@@ -93,15 +97,22 @@ function addClass(cssSelector) {
 
 
 function deleteClass(className) {
-    deleteCLassModel(className);
+    var class_deleted = new Obj_Class(className);
+    class_deleted.deleteClass(className);
 }
 
 function openClass(className) {
+    
     mainView.router.load({ url: "Class.html" });
-    loaded_class = new Obj_Class(null, className);
-    loaded_class.loadClass();
-    $$('#class-title').text(className);
-    sessionStorage.setItem("ClassName", className);
+
+    myApp.onPageInit("Class", function(page){
+        loaded_class = new Obj_Class(className);
+        loaded_class.setTitle(className);
+        loaded_class.loadClass();
+
+        $$('#class-title').text(className);
+        sessionStorage.setItem("ClassName", className);
+    });
 }
 
 function addGrade(cssSelector){
@@ -111,7 +122,11 @@ function addGrade(cssSelector){
 }
 
 function deleteGrade(itemName){
-    deleteGradeModel(itemName, loaded_class);
+    grade_deleted = new Grade(null, null);
+    grade_deleted.deleteGrade(itemName, sessionStorage.getItem("ClassName"));
 }
 
-
+function changed(){
+    $$("#target").text($$("#gradeNeeded").val());
+    loaded_class.updateGrades();
+}

@@ -10,7 +10,7 @@ function insertClass(class_obj) {
 function loadClassTable() {
     testValues();
     gradebook = getGradebook();
-    if (gradebook ==null){
+    if ( gradebook == null ||gradebook.length == 0){
         return successMessage('Plaese Add Classes', 'NO Classes!');
     }
 
@@ -21,24 +21,22 @@ function loadClassTable() {
 
 
 function deleteCLassModel(className) {
-    loadDB("class");
-    db.transaction(function (tx) {
-        sql = "DELETE FROM " + name + " WHERE title=?";
-        tx.executeSql(sql, [className], function (tx, results) {
-            //delete From list 
-            removeFromList(className);
-        });
-
-    });
+    removeClassFromGradeBook(className);
+    removeFromList(className);
 }
 
 function isUniqueClassTDG(class_name) {
     var gradebook = getGradebook(); 
     
-    if (gradebook[class_name]){
+    if(gradebook == null){
+        return true;
+    }
+
+    if ( gradebook.length != 0 && gradebook[class_name]){
        successMessage('Class name Already Exists!', 'Class Found');
        return false;
     }
+
     else{
         return true;   
     }    

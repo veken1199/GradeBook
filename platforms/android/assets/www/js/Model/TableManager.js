@@ -57,7 +57,6 @@ function getData_success(tx, results) {
     else {
         loadClassList(results.rows);
     }
-
 }
 
 function success_callback() {
@@ -65,3 +64,63 @@ function success_callback() {
 }
 
 
+function getGradebook(){
+    var gradebook = JSON.parse(localStorage.getItem("gradebook"));
+    return gradebook;
+}
+
+function getClass(class_name){
+    var class_obj = (JSON.parse(localStorage.getItem("gradebook")))[class_name];
+    return class_obj;
+}
+
+
+
+// class info is json obj in the following format:
+//          {'title' : 'class_name',
+//          'content: 'class_description',
+//          'grade: {} '};
+function addClassToGradeBook(class_info){
+    var gradebook = getGradebook();
+
+    if(gradebook == null || gradebook.length == 0){
+        gradebook = {};
+    }
+    gradebook[class_info['title']] = class_info;
+    storeInLocalStorage(gradebook, 'gradebook');
+}
+
+function removeClassFromGradeBook(class_name){
+    gradebook = getGradebook();
+    delete gradebook[class_name];
+    storeInLocalStorage(gradebook, 'gradebook');
+}
+
+// takes json obj and localstorage key
+function storeInLocalStorage(json_obj, storage_key){
+    localStorage.setItem(storage_key, JSON.stringify(json_obj));
+}
+
+//insert grade to a class
+function insertGradeIntoClass(item, class_name){
+    var gradebook = getGradebook();
+    gradebook[class_name]['grades'][item['item']]={};
+    gradebook[class_name]['grades'][item.item] = item;
+    storeInLocalStorage(gradebook, 'gradebook');
+}
+
+function removeGradeFromClass(item, class_name){
+    var gradebook = getGradebook();
+    delete gradebook[class_name]['grades'][item];
+    storeInLocalStorage(gradebook, 'gradebook');
+}
+
+//method to check if json objects are empty 
+function isEmptyObject(obj){
+    var count = 0;
+    $$.each(obj,function(index,element) {
+        count++;
+    });
+
+    return count == 0;
+}
