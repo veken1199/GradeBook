@@ -73,15 +73,22 @@ function calculateClassStats(grades, target) {
         completed = completed + parseInt(element.percentage);
         current_grade = current_grade + ((parseInt(element.grade) / parseInt(element.maxgrade)) * parseInt(element.percentage));
     });
+    
+    var currentContribution = current_grade;
 
     current_grade = (current_grade / completed) * 100;
     var final_exam = 100 - completed;
 
+    var neededContribution  = (target - currentContribution)
+    var needed = (neededContribution/final_exam)*100;
+    var neededContribution = (neededContribution/100)*final_exam
+
     //calculating the needed grade
-    var needed = ((parseInt(target) - current_grade) / final_exam) * 80;
+    //var needed = final_exam  - (((parseInt(target) - current_grade) / final_exam) )* 100;
 
     ViewClassStats({ 'current_grade': current_grade.toFixed(3), 
                      'final_exam': final_exam.toFixed(3), 
                      'needed': needed.toFixed(3), 
-                     'target': target});
+                     'target': target,
+                     'neededContri': neededContribution});
 }
