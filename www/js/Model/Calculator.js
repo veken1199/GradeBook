@@ -81,7 +81,7 @@ function calculateClassStats(grades, target) {
 
     var neededContribution  = (target - currentContribution)
     var needed = (neededContribution/final_exam)*100;
-    var neededContribution = (neededContribution/100)*final_exam
+    var neededContribution = (neededContribution.toFixed(3)/100)*final_exam
 
     //calculating the needed grade
     //var needed = final_exam  - (((parseInt(target) - current_grade) / final_exam) )* 100;
