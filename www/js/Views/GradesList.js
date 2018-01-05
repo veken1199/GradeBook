@@ -50,4 +50,5 @@ function ViewClassStats(stats){
     $$("#current_grade").text(stats.current_grade);
     $$("#targetView").text(stats.target);
     $$("#needed").text(stats.needed);
+    $$("#neededContrib").text(stats.neededContri +"/"+stats.final_exam);
 }
